@@ -8,6 +8,7 @@ COPY gradle ./gradle
 COPY src ./src
 
 # Build the Spring Boot fat JAR
+RUN chmod +x ./gradlew
 RUN ./gradlew clean bootJar --no-daemon
 
 # ---------- Runtime Stage ----------
