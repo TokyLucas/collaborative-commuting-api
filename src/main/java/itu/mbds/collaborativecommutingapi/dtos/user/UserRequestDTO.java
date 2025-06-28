@@ -8,13 +8,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
-import org.springframework.data.mongodb.core.index.Indexed;
 
 import java.util.Date;
 
 @Data
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor @Builder
-public class UserSignUpDTO {
+public class UserRequestDTO {
     @NotBlank(message = "Le nom est obligatoire")
     private String lastName;
 

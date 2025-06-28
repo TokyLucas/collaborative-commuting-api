@@ -24,5 +24,6 @@ body:json {
 
 script:post-response {
   const json = res.getBody();
-  bru.setEnvVar("PASSAGER_ID", json.id);
+  if(json.id != null)
+    bru.setEnvVar("PASSAGER_ID", json.id);
 }

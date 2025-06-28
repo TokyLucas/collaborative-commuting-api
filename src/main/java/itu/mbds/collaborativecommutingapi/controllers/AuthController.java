@@ -1,7 +1,8 @@
 package itu.mbds.collaborativecommutingapi.controllers;
 
+import itu.mbds.collaborativecommutingapi.dtos.user.UserDTO;
 import itu.mbds.collaborativecommutingapi.dtos.user.UserSignInDTO;
-import itu.mbds.collaborativecommutingapi.dtos.user.UserSignUpDTO;
+import itu.mbds.collaborativecommutingapi.dtos.user.UserRequestDTO;
 import itu.mbds.collaborativecommutingapi.entities.User;
 import itu.mbds.collaborativecommutingapi.services.jwt.IJwtService;
 import itu.mbds.collaborativecommutingapi.services.user.IUserService;
@@ -31,13 +32,13 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> signUp(@Valid @RequestBody UserSignUpDTO userSignUpDTO) {
-        if (userService.getUserByEmail(userSignUpDTO.getEmail()) != null) {
+    public ResponseEntity<?> signUp(@Valid @RequestBody UserRequestDTO userRequestDTO) {
+        if (userService.getUserByEmail(userRequestDTO.getEmail()) != null) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("message", "Email déja utilisé"));
         }
 
-        userSignUpDTO.setPassword(encoder.encode(userSignUpDTO.getPassword()));
-        User createdUser = userService.save(userSignUpDTO);
+        userRequestDTO.setPassword(encoder.encode(userRequestDTO.getPassword()));
+        UserDTO createdUser = userService.save(userRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
 

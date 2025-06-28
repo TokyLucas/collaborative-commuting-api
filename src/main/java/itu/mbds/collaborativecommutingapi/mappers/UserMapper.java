@@ -1,7 +1,7 @@
 package itu.mbds.collaborativecommutingapi.mappers;
 
 import itu.mbds.collaborativecommutingapi.dtos.user.UserDTO;
-import itu.mbds.collaborativecommutingapi.dtos.user.UserSignUpDTO;
+import itu.mbds.collaborativecommutingapi.dtos.user.UserRequestDTO;
 import itu.mbds.collaborativecommutingapi.entities.User;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +21,7 @@ public class UserMapper {
         return user;
     }
 
-    public User toUser(UserSignUpDTO userDTO) {
+    public User toUser(UserRequestDTO userDTO) {
         User user = new User();
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());

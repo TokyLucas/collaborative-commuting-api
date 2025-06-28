@@ -1,7 +1,7 @@
 meta {
-  name: 200 Profile CONDUCTEUR
+  name: 403 Profile CONDUCTEUR WITH PASSAGER_TOKEN
   type: http
-  seq: 6
+  seq: 7
 }
 
 get {
@@ -11,9 +11,9 @@ get {
 }
 
 auth:bearer {
-  token: {{CONDUCTEUR_TOKEN}}
+  token: {{PASSAGER_TOKEN}}
 }
 
 assert {
-  res.status: eq 200
+  res.status: eq 403
 }

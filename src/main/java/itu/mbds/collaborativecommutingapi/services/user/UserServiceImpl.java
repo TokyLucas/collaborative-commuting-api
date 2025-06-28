@@ -1,8 +1,9 @@
 package itu.mbds.collaborativecommutingapi.services.user;
 
 import itu.mbds.collaborativecommutingapi.dtos.user.UserDTO;
-import itu.mbds.collaborativecommutingapi.dtos.user.UserSignUpDTO;
+import itu.mbds.collaborativecommutingapi.dtos.user.UserRequestDTO;
 import itu.mbds.collaborativecommutingapi.entities.User;
+import itu.mbds.collaborativecommutingapi.exceptions.EntityNotFoundException;
 import itu.mbds.collaborativecommutingapi.mappers.UserMapper;
 import itu.mbds.collaborativecommutingapi.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,26 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public User save(UserSignUpDTO userSignUpDTO) {
-        return userRepository.save(userMapper.toUser(userSignUpDTO));
+    public UserDTO save(UserRequestDTO userRequestDTO) {
+        return userMapper.toUserDTO(userRepository.save(userMapper.toUser(userRequestDTO)));
+    }
+
+    @Override
+    public UserDTO update(String id, UserRequestDTO userDTO) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isEmpty())
+            throw new EntityNotFoundException("User id: " + id + " not found");
+        System.out.println(id);
+        User userExistant = user.get();
+        System.out.println(userExistant.getId());
+        userExistant.setFirstName(userDTO.getFirstName());
+        userExistant.setLastName(userDTO.getLastName());
+        userExistant.setEmail(userDTO.getEmail());
+        userExistant.setPassword(userDTO.getPassword());
+        userExistant.setBirthDate(userDTO.getBirthDate());
+        userExistant.setGender(userDTO.getGender());
+        userExistant.setType(userDTO.getType());
+
+        return userMapper.toUserDTO(userRepository.save(userExistant));
     }
 }
