@@ -50,9 +50,7 @@ public class UserServiceImpl implements IUserService {
         Optional<User> user = userRepository.findById(id);
         if (user.isEmpty())
             throw new EntityNotFoundException("User id: " + id + " not found");
-        System.out.println(id);
         User userExistant = user.get();
-        System.out.println(userExistant.getId());
         userExistant.setFirstName(userDTO.getFirstName());
         userExistant.setLastName(userDTO.getLastName());
         userExistant.setEmail(userDTO.getEmail());
@@ -62,5 +60,12 @@ public class UserServiceImpl implements IUserService {
         userExistant.setType(userDTO.getType());
 
         return userMapper.toUserDTO(userRepository.save(userExistant));
+    }
+
+    @Override
+    public void updateProfilePicture(UserDTO userDTO, String profilePicturePath) {
+        User userExistant = userMapper.toUser(userDTO);
+        userExistant.setProfilePicture(profilePicturePath);
+        userRepository.save(userExistant);
     }
 }

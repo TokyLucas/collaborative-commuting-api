@@ -32,6 +32,8 @@ public class UserDTO {
     @Email(message = "L'email doit être valide")
     private String email;
 
+    private String profilePicture;
+
     @NotNull(message = "Le type est obligatoire")
     private UserType type;
 

@@ -35,6 +35,8 @@ public class UserRequestDTO {
     @Size(min = 8, message = "Le mot de passe doit contenir au moins 8 caractères")
     private String password;
 
+    private String profilePicture;
+
     @NotNull(message = "Le type est obligatoire")
     private UserType type;
 }

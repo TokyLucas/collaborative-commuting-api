@@ -35,6 +35,8 @@ public class User {
 
     private String password;
 
+    private String profilePicture;
+
     private UserType type;
 
     @CreatedDate

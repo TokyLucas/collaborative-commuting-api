@@ -10,7 +10,7 @@ public interface IUserService {
     List<UserDTO> getAll();
     User getUserByEmail(String email);
     UserDTO getUserById(String id);
-
     UserDTO save(UserRequestDTO user);
     UserDTO update(String id, UserRequestDTO user);
+    void updateProfilePicture(UserDTO user, String profilePicturePath);
 }
