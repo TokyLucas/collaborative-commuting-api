@@ -63,9 +63,14 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public void updateProfilePicture(UserDTO userDTO, String profilePicturePath) {
-        User userExistant = userMapper.toUser(userDTO);
+    public String updateProfilePicture(String id, String profilePicturePath) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isEmpty())
+            throw new EntityNotFoundException("User id: " + id + " not found");
+        User userExistant = user.get();
+        String oldProfilePicture = userExistant.getProfilePicture();
         userExistant.setProfilePicture(profilePicturePath);
         userRepository.save(userExistant);
+        return oldProfilePicture;
     }
 }

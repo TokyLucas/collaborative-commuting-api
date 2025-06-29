@@ -47,9 +47,9 @@ public class AuthController {
         User user = userService.getUserByEmail(userSignInDTO.getEmail());
 
         if (user == null)
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "Aucun compte lié à cet Email"));
         if (!encoder.matches(userSignInDTO.getPassword(), user.getPassword()))
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Mot de passe incorrect"));
 
         String token = jwtService.generateToken(user.getEmail());
         UserDTO userDTO = userService.getUserById(user.getId());
@@ -61,6 +61,6 @@ public class AuthController {
     @GetMapping("/test")
     @PreAuthorize("hasRole('PASSAGER')")
     public ResponseEntity<?> test() {
-        return ResponseEntity.ok("Hello World");
+        return ResponseEntity.ok(Map.of("message", "Hello World!"));
     }
 }

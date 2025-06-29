@@ -54,12 +54,8 @@ public class UserController {
     @PreAuthorize("#id == authentication.principal.id")
     public ResponseEntity<?> updateUserProfilePicture(@PathVariable String id, @RequestParam("profile-picture") MultipartFile profilePicture) {
         try {
-            UserDTO user = userService.getUserById(id);
-
-            String oldProfilePicture = user.getProfilePicture();
-
             String filePath = fileService.upload(PROFILE_PIC_UPLOAD_DIR, profilePicture);
-            userService.updateProfilePicture(user, filePath);
+            String oldProfilePicture = userService.updateProfilePicture(id ,filePath);
 
             if(oldProfilePicture != null) fileService.delete(oldProfilePicture);
 
