@@ -12,5 +12,5 @@ public interface IUserService {
     UserDTO getUserById(String id);
     UserDTO save(UserRequestDTO user);
     UserDTO update(String id, UserRequestDTO user);
-    void updateProfilePicture(UserDTO user, String profilePicturePath);
+    String updateProfilePicture(String id, String profilePicturePath);
 }
