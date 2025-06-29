@@ -1,0 +1,27 @@
+meta {
+  name: 200 SIgn In PASSAGER
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{URL}}/api/auth/signin
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "email": "toky.passager@gmail.com",
+    "password": "12345678"
+  }
+}
+
+assert {
+  res.status: eq 200
+}
+
+script:post-response {
+  const json = res.getBody();
+  bru.setEnvVar("PASSAGER_TOKEN", json.token);
+}

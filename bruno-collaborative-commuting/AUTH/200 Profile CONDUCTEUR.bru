@@ -1,0 +1,19 @@
+meta {
+  name: 200 Profile CONDUCTEUR
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{URL}}/api/users/profile/{{CONDUCTEUR_ID}}
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{CONDUCTEUR_TOKEN}}
+}
+
+assert {
+  res.status: eq 200
+}

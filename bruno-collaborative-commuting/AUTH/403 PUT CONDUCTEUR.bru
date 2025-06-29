@@ -1,0 +1,31 @@
+meta {
+  name: 403 PUT CONDUCTEUR
+  type: http
+  seq: 10
+}
+
+put {
+  url: {{URL}}/api/users/profile/{{CONDUCTEUR_ID}}
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{PASSAGER_TOKEN}}
+}
+
+body:json {
+  {
+    "firstName": "Toky",
+    "lastName": "Andrianina",
+    "email": "toky.andrianina401@gmail.com",
+    "password": "12345678",
+    "birthDate": "2001-08-19",
+    "gender": "HOMME",
+    "type": "CONDUCTEUR"
+  }
+}
+
+assert {
+  res.status: eq 403
+}

@@ -1,0 +1,27 @@
+meta {
+  name: 200 SIgn In CONDUCTEUR
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{URL}}/api/auth/signin
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "email": "toky.andrianina401@gmail.com",
+    "password": "12345678"
+  }
+}
+
+assert {
+  res.status: eq 200
+}
+
+script:post-response {
+  const json = res.getBody();
+  bru.setEnvVar("CONDUCTEUR_TOKEN", json.token);
+}
