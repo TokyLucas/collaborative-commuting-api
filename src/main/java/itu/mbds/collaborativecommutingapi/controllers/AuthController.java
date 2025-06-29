@@ -52,7 +52,10 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
 
         String token = jwtService.generateToken(user.getEmail());
-        return ResponseEntity.ok(Map.of("token", token));
+        UserDTO userDTO = userService.getUserById(user.getId());
+        return ResponseEntity.ok(Map.of(
+            "token", token, "user", userDTO
+        ));
     }
 
     @GetMapping("/test")
