@@ -3,6 +3,7 @@ package itu.mbds.collaborativecommutingapi.controllers;
 import itu.mbds.collaborativecommutingapi.dtos.user.UserDTO;
 import itu.mbds.collaborativecommutingapi.dtos.user.UserRequestDTO;
 import itu.mbds.collaborativecommutingapi.exceptions.EntityNotFoundException;
+import itu.mbds.collaborativecommutingapi.security.CustomUserDetails;
 import itu.mbds.collaborativecommutingapi.services.file.IFileService;
 import itu.mbds.collaborativecommutingapi.services.user.IUserService;
 import jakarta.validation.Valid;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,10 +38,15 @@ public class UserController {
         this.encoder = encoder;
     }
 
-    @GetMapping("/profile/{id}")
-    @PreAuthorize("#id == authentication.principal.id")
+    @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable String id) {
         UserDTO user = userService.getUserById(id);
+        return ResponseEntity.ok(user);
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<UserDTO> profile(@AuthenticationPrincipal CustomUserDetails userDetails) {
+        UserDTO user = userService.getUserById(userDetails.getId());
         return ResponseEntity.ok(user);
     }
 
