@@ -21,9 +21,3 @@ body:json {
     "type": "PASSAGER"
   }
 }
-
-script:post-response {
-  const json = res.getBody();
-  if(json.id != null)
-    bru.setEnvVar("PASSAGER_ID", json.id);
-}
