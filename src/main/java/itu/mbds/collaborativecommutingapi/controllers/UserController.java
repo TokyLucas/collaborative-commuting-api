@@ -51,7 +51,10 @@ public class UserController {
 
     @PutMapping("/profile/{id}")
     @PreAuthorize("#id == authentication.principal.id")
-    public ResponseEntity<UserDTO> updateUser(@PathVariable String id, @Valid @RequestBody UserRequestDTO userDTO) {
+    public ResponseEntity<?> updateUser(@PathVariable String id, @Valid @RequestBody UserRequestDTO userDTO) {
+        if (userService.getUserByEmail(userDTO.getEmail()) != null) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("message", "Email déja utilisé"));
+        }
         if(userDTO.getPassword() != null) {
             userDTO.setPassword(encoder.encode(userDTO.getPassword()));
         }
