@@ -1,6 +1,8 @@
 package itu.mbds.collaborativecommutingapi.enums;
 
-public enum Gender {
-    HOMME,
-    FEMME
+public enum Status {
+    EN_ATTENTE,
+    ACCEPTEE,
+    TERMINEE,
+    ANNULEE
 }
