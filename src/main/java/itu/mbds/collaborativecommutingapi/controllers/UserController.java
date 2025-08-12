@@ -53,7 +53,9 @@ public class UserController {
     @PutMapping("/profile/{id}")
     @PreAuthorize("#id == authentication.principal.id")
     public ResponseEntity<UserDTO> updateUser(@PathVariable String id, @Valid @RequestBody UserRequestDTO userDTO) {
-        userDTO.setPassword(encoder.encode(userDTO.getPassword()));
+        if(userDTO.getPassword() != null) {
+            userDTO.setPassword(encoder.encode(userDTO.getPassword()));
+        }
         userService.update(id, userDTO);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
