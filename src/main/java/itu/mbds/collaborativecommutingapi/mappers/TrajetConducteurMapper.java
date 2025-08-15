@@ -18,6 +18,7 @@ public class TrajetConducteurMapper {
         t.setPlacesDisponibles(dto.getPlacesDisponibles());
         t.setDescription(dto.getDescription());
         t.setStatut(dto.getStatut());
+        t.setActif(dto.getActif());
         return t;
     }
 
@@ -35,6 +36,7 @@ public class TrajetConducteurMapper {
         dto.setPlacesDisponibles(t.getPlacesDisponibles());
         dto.setDescription(t.getDescription());
         dto.setStatut(t.getStatut());
+        dto.setActif(t.getActif());
         return dto;
     }
 

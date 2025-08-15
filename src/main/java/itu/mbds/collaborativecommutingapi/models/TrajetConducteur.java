@@ -13,16 +13,16 @@ public class TrajetConducteur {
     private String id;
     private String idConducteur;
     private String pointDepart;
-    private double latDepart;
-    private double lngDepart;
+    private Double latDepart;
+    private Double lngDepart;
     private String pointArrivee;
-    private double latArrivee;
-    private double lngArrivee;
+    private Double latArrivee;
+    private Double lngArrivee;
     private LocalDateTime heureDepartEstimee;
-    private int placesDisponibles;
+    private Integer placesDisponibles;
     private String description;
     private String statut;
     private LocalDateTime creeLe = LocalDateTime.now();
     private LocalDateTime misAJourLe = LocalDateTime.now();
-    private int actif;
+    private Integer actif;
 }
