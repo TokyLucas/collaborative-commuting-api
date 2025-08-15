@@ -1,12 +1,9 @@
 package itu.mbds.collaborativecommutingapi.controllers;
 
-
 import itu.mbds.collaborativecommutingapi.dtos.TrajetConducteurDTO;
-import itu.mbds.collaborativecommutingapi.dtos.user.UserDTO;
 import itu.mbds.collaborativecommutingapi.models.TrajetConducteur;
 import itu.mbds.collaborativecommutingapi.services.trajetConducteur.ITrajetConducteurService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,7 +32,7 @@ public class TrajetConducteurController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("#id == authentication.principal.id")
+    @PreAuthorize("isAuthenticated()")
     public TrajetConducteur getById(@PathVariable String id) {
         return service.getById(id);
     }
@@ -45,5 +42,18 @@ public class TrajetConducteurController {
     public void delete(@PathVariable String id) {
         service.delete(id);
     }
+
+    @PutMapping("/{id}")
+    @PreAuthorize("isAuthenticated()")
+    public TrajetConducteur update(@PathVariable String id, @RequestBody TrajetConducteurDTO dto) {
+        return service.update(id, dto);
+    }
+
+    @GetMapping("/conducteur/{conducteurId}")
+    @PreAuthorize("isAuthenticated()")
+    public List<TrajetConducteurDTO> getByConducteur(@PathVariable String conducteurId) {
+        return service.getByIdConducteur(conducteurId);
+    }
+
 
 }

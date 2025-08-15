@@ -24,4 +24,5 @@ public class TrajetConducteur {
     private String statut;
     private LocalDateTime creeLe = LocalDateTime.now();
     private LocalDateTime misAJourLe = LocalDateTime.now();
+    private int actif;
 }

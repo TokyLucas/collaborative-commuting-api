@@ -35,4 +35,24 @@ public class TrajetConducteurService implements ITrajetConducteurService {
     public void delete(String id) {
         repository.deleteById(id);
     }
+
+    @Override
+    public TrajetConducteur update(String id, TrajetConducteurDTO dto) {
+        TrajetConducteur existing = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Trajet non trouvé"));
+
+        TrajetConducteur updated = TrajetConducteurMapper.toEntity(dto);
+        updated.setId(id); // conserver l'ID existant
+        updated.setIdConducteur(existing.getIdConducteur()); // si tu ne veux pas le modifier
+
+        return repository.save(updated);
+    }
+
+    @Override
+    public List<TrajetConducteurDTO> getByIdConducteur(String conducteurId) {
+        return repository.findByIdConducteur(conducteurId)
+                .stream()
+                .map(TrajetConducteurMapper::toDto)
+                .toList();
+    }
 }
