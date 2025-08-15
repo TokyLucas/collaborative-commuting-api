@@ -2,6 +2,7 @@ package itu.mbds.collaborativecommutingapi.controllers;
 
 import itu.mbds.collaborativecommutingapi.dtos.user.UserDTO;
 import itu.mbds.collaborativecommutingapi.dtos.user.UserRequestDTO;
+import itu.mbds.collaborativecommutingapi.entities.User;
 import itu.mbds.collaborativecommutingapi.exceptions.EntityNotFoundException;
 import itu.mbds.collaborativecommutingapi.security.CustomUserDetails;
 import itu.mbds.collaborativecommutingapi.services.file.IFileService;
@@ -20,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/users")
@@ -52,8 +54,14 @@ public class UserController {
 
     @PutMapping("/profile/{id}")
     @PreAuthorize("#id == authentication.principal.id")
-    public ResponseEntity<UserDTO> updateUser(@PathVariable String id, @Valid @RequestBody UserRequestDTO userDTO) {
-        userDTO.setPassword(encoder.encode(userDTO.getPassword()));
+    public ResponseEntity<?> updateUser(@PathVariable String id, @Valid @RequestBody UserRequestDTO userDTO) {
+        User emailUser = userService.getUserByEmail(userDTO.getEmail());
+        if ( emailUser != null && !Objects.equals(emailUser.getId(), id)) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("message", "Email déja utilisé"));
+        }
+        if(userDTO.getPassword() != null) {
+            userDTO.setPassword(encoder.encode(userDTO.getPassword()));
+        }
         userService.update(id, userDTO);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }

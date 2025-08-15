@@ -24,4 +24,5 @@ assert {
 script:post-response {
   const json = res.getBody();
   bru.setEnvVar("CONDUCTEUR_TOKEN", json.token);
+  bru.setEnvVar("CONDUCTEUR_ID", json.userId);
 }
