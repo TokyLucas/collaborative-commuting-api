@@ -1,25 +1,18 @@
-package itu.mbds.collaborativecommutingapi.entities;
+package itu.mbds.collaborativecommutingapi.dtos.demande;
 
-import itu.mbds.collaborativecommutingapi.enums.Status;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
-@Document(collection = "demandes")
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
-public class Demande {
+@Data
+@Getter @Setter @AllArgsConstructor @NoArgsConstructor @Builder
+public class DemandeRequestDTO {
 
-    @Id
+    @NotNull
     private String id;
 
-    @NotBlank
+    @NotNull
     private String etudiantId;
 
     @NotNull
@@ -42,6 +35,9 @@ public class Demande {
 
     @NotNull
     private LocalDateTime heureDepartEstimee;
+
+    @NotNull
+    private Disponibilite nbDisponibilite;
 
     @NotNull
     private Status statut = Status.EN_ATTENTE;

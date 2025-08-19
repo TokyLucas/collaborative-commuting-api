@@ -49,11 +49,4 @@ public class DemandeServiceImpl implements IDemandeService {
         }
         demandeRepository.deleteById(id);
     }
-
-    /*@Override
-    public List<MatchResponseDTO> matchDemandes(String demandeId) {
-        // 👉 Ici tu appelles la logique de matching (conducteurs proches + trajets compatibles)
-        // Pour l'instant je mets un stub
-        return List.of();
-    }*/
 }

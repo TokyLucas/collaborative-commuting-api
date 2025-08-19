@@ -22,25 +22,28 @@ public class DemandeController {
         this.demandeService = demandeService;
     }
 
-    // ➡️ Création d’une demande
+    // Création d’une demande
     @PostMapping
     public ResponseEntity<DemandeResponseDTO> create(@Valid @RequestBody DemandeRequestDTO dto) {
+        // Récupère automatiquement l'ID de l'étudiant connecté
+        String authenticatedStudentId = userDetails.getId();
+        dto.setEtudiantId(authenticatedStudentId);
         return ResponseEntity.ok(demandeService.create(dto));
     }
 
-    // ➡️ Récupération d’une demande par ID
+    // Récupération d’une demande par ID
     @GetMapping("/{id}")
     public ResponseEntity<DemandeResponseDTO> getById(@PathVariable String id) {
         return ResponseEntity.ok(demandeService.getById(id));
     }
 
-    // ➡️ Récupération de toutes les demandes
+    // Récupération de toutes les demandes
     @GetMapping
     public ResponseEntity<List<DemandeResponseDTO>> getAll() {
         return ResponseEntity.ok(demandeService.getAll());
     }
 
-    // ➡️ Suppression d’une demande par ID
+    // Suppression d’une demande par ID
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable String id) {
         demandeService.delete(id);
