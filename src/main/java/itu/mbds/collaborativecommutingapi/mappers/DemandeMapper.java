@@ -28,7 +28,6 @@ public class DemandeMapper {
                 .pointArrivee(demande.getPointArrivee())
                 .arriveeLongitude(demande.getArriveeLongitude())
                 .arriveeLatitude(demande.getArriveeLatitude())
-                .disponibilite(demande.getNbDisponibilite())
                 .statut(demande.getStatut())
                 .dateCreation(demande.getDateCreation())
                 .build();

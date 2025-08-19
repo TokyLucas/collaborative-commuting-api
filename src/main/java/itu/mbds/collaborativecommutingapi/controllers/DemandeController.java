@@ -25,9 +25,6 @@ public class DemandeController {
     // Création d’une demande
     @PostMapping
     public ResponseEntity<DemandeResponseDTO> create(@Valid @RequestBody DemandeRequestDTO dto) {
-        // Récupère automatiquement l'ID de l'étudiant connecté
-        String authenticatedStudentId = userDetails.getId();
-        dto.setEtudiantId(authenticatedStudentId);
         return ResponseEntity.ok(demandeService.create(dto));
     }
 
