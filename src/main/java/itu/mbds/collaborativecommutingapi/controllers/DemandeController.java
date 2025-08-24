@@ -1,9 +1,13 @@
 package itu.mbds.collaborativecommutingapi.controllers;
 
 import java.util.List;
+
+import itu.mbds.collaborativecommutingapi.dtos.TrajetConducteurDTO;
 import itu.mbds.collaborativecommutingapi.dtos.demande.DemandeRequestDTO;
 import itu.mbds.collaborativecommutingapi.dtos.demande.DemandeResponseDTO;
+import itu.mbds.collaborativecommutingapi.entities.Demande;
 import itu.mbds.collaborativecommutingapi.services.demande.IDemandeService;
+import itu.mbds.collaborativecommutingapi.services.match.IMatchingService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +20,12 @@ import org.springframework.web.bind.annotation.*;
 public class DemandeController {
 
     private final IDemandeService demandeService;
+    private final IMatchingService matchingService;
 
     @Autowired
-    public DemandeController(IDemandeService demandeService) {
+    public DemandeController(IDemandeService demandeService, IMatchingService matchingService) {
         this.demandeService = demandeService;
+        this.matchingService = matchingService;
     }
 
     // Création d’une demande
@@ -47,9 +53,15 @@ public class DemandeController {
         return ResponseEntity.noContent().build();
     }
 
-    // ➡️ Récupération des conducteurs qui matchent une demande
-    /*@GetMapping("/{id}/match")
-    public ResponseEntity<?> matchDemandes(@PathVariable String id) {
-        return ResponseEntity.ok(demandeService.matchDemandes(id));
-    }*/
+    //Récupération d'un match
+    @GetMapping("/{id}/match")
+    public ResponseEntity<List<TrajetConducteurDTO>> matchDemandes(@PathVariable String id) {
+        // On récupère la demande depuis la DB
+        DemandeResponseDTO demande = demandeService.getById(id); // méthode à créer dans ton service pour renvoyer l'entité complète
+
+        // On récupère les conducteurs matchés
+        List<TrajetConducteurDTO> conducteursMatch = matchingService.matchConducteurs(demande);
+
+        return ResponseEntity.ok(conducteursMatch);
+    }
 }

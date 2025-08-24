@@ -20,4 +20,21 @@ public class TrajetConducteurMapper {
         t.setStatut(dto.getStatut());
         return t;
     }
+
+    public static TrajetConducteurDTO toDTO(TrajetConducteur entity) {
+        TrajetConducteurDTO dto = new TrajetConducteurDTO();
+        dto.setId(entity.getId());
+        dto.setIdConducteur(entity.getIdConducteur());
+        dto.setPointDepart(entity.getPointDepart());
+        dto.setLatDepart(entity.getLatDepart());
+        dto.setLngDepart(entity.getLngDepart());
+        dto.setPointArrivee(entity.getPointArrivee());
+        dto.setLatArrivee(entity.getLatArrivee());
+        dto.setLngArrivee(entity.getLngArrivee());
+        dto.setHeureDepartEstimee(entity.getHeureDepartEstimee());
+        dto.setPlacesDisponibles(entity.getPlacesDisponibles());
+        dto.setDescription(entity.getDescription());
+        dto.setStatut(entity.getStatut());
+        return dto;
+    }
 }
