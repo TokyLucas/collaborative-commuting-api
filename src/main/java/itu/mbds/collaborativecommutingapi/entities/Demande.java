@@ -41,6 +41,12 @@ public class Demande {
     private Double arriveeLongitude;
 
     @NotNull
+    private int nbPlaces;
+
+    @NotNull
+    private Double tarif;
+
+    @NotNull
     private LocalDateTime heureDepartEstimee;
 
     @NotNull

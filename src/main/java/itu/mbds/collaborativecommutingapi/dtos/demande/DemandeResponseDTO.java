@@ -17,7 +17,8 @@ public class DemandeResponseDTO {
     private String pointArrivee;
     private Double arriveeLatitude;
     private Double arriveeLongitude;
-    private Disponibilite disponibilite;
+    private int nbPlaces;
+    private Double tarif;
     private Status statut;
     private Date dateCreation;
 }

@@ -15,6 +15,8 @@ public class DemandeMapper {
                 .pointArrivee(dto.getPointArrivee())
                 .arriveeLongitude(dto.getArriveeLongitude())
                 .arriveeLatitude(dto.getArriveeLatitude())
+                .nbPlaces(dto.getNbPlaces())
+                .tarif(dto.getTarif())
                 .heureDepartEstimee(dto.getHeureDepartEstimee())
                 .build();
     }
@@ -28,6 +30,8 @@ public class DemandeMapper {
                 .pointArrivee(demande.getPointArrivee())
                 .arriveeLongitude(demande.getArriveeLongitude())
                 .arriveeLatitude(demande.getArriveeLatitude())
+                .nbPlaces(demande.getNbPlaces())
+                .tarif(demande.getTarif())
                 .statut(demande.getStatut())
                 .dateCreation(demande.getDateCreation())
                 .build();
