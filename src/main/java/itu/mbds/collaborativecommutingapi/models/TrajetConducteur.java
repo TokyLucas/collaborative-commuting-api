@@ -25,4 +25,7 @@ public class TrajetConducteur {
     private LocalDateTime creeLe = LocalDateTime.now();
     private LocalDateTime misAJourLe = LocalDateTime.now();
     private Integer actif;
+    private String marque;
+    private String type;
+    private String couleur;
 }

@@ -19,6 +19,9 @@ public class TrajetConducteurMapper {
         t.setDescription(dto.getDescription());
         t.setStatut(dto.getStatut());
         t.setActif(dto.getActif());
+        t.setMarque(dto.getMarque());
+        t.setType(dto.getType());
+        t.setCouleur(dto.getCouleur());
         return t;
     }
 
@@ -37,6 +40,9 @@ public class TrajetConducteurMapper {
         dto.setDescription(t.getDescription());
         dto.setStatut(t.getStatut());
         dto.setActif(t.getActif());
+        dto.setMarque(t.getMarque());
+        dto.setType(t.getType());
+        dto.setCouleur(t.getCouleur());
         return dto;
     }
 

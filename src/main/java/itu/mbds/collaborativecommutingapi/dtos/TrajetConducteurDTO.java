@@ -19,4 +19,7 @@ public class TrajetConducteurDTO {
     private String description;
     private String statut;
     private Integer actif;
+    private String marque;
+    private String type;
+    private String couleur;
 }
