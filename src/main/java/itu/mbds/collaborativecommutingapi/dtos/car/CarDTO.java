@@ -24,7 +24,7 @@ public class CarDTO {
     @Min(value = 1)
     private Integer nbPlaces;
 
-    private String user;
+    private String userId;
 
     private Date createdAt;
 

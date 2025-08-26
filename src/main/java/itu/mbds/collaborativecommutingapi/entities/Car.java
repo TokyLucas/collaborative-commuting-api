@@ -26,7 +26,7 @@ public class Car {
     @Min(value = 1)
     private Integer nbPlaces;
 
-    private String user;
+    private String userId;
 
     @CreatedDate
     private Date createdAt;

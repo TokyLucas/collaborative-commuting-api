@@ -16,7 +16,7 @@ public class CarMapper {
         carDTO.setModel(car.getModel());
         carDTO.setColor(car.getColor());
         carDTO.setNbPlaces(car.getNbPlaces());
-        carDTO.setUser(car.getUser());
+        carDTO.setUserId(car.getUserId());
         return carDTO;
     }
 

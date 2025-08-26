@@ -9,6 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface CarRepository extends MongoRepository<Car, String> {
-    Optional<Car> findByUserAndId(String user, String id);
-    List<Car> findAllByUser(String user);
+    Optional<Car> findByUserIdAndId(String userId, String id);
+    List<Car> findAllByUserId(String userId);
 }
