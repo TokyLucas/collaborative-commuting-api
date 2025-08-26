@@ -26,5 +26,5 @@ public class DemandeRequestDTO {
     @NotNull
     private Double tarif;
     @NotNull
-    private LocalDateTime heureDepartEstimee;
+    private LocalDateTime heureArriveeEstimee;
 }

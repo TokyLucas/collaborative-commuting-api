@@ -1,11 +1,11 @@
 meta {
-  name: 200 Profile CONDUCTEUR after PUT
+  name: 200 Voiture CONDUCTEUR
   type: http
-  seq: 10
+  seq: 2
 }
 
 get {
-  url: {{URL}}/api/users/me
+  url: {{URL}}/api/users/{{CONDUCTEUR_ID}}/cars/68adbf9619417ef45894a6ee
   body: none
   auth: bearer
 }

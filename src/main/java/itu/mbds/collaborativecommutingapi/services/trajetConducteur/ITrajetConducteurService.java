@@ -11,4 +11,8 @@ public interface ITrajetConducteurService {
         List<TrajetConducteur> getAll();
         TrajetConducteur getById(String id);
         void delete(String id);
+        TrajetConducteur update(String id, TrajetConducteurDTO trajet);
+        List<TrajetConducteurDTO> getByIdConducteur(String conducteurId);
+
+
 }

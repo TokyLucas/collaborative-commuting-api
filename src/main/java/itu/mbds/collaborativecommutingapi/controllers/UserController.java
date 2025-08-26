@@ -1,9 +1,12 @@
 package itu.mbds.collaborativecommutingapi.controllers;
 
+import itu.mbds.collaborativecommutingapi.dtos.car.CarDTO;
 import itu.mbds.collaborativecommutingapi.dtos.user.UserDTO;
 import itu.mbds.collaborativecommutingapi.dtos.user.UserRequestDTO;
+import itu.mbds.collaborativecommutingapi.entities.User;
 import itu.mbds.collaborativecommutingapi.exceptions.EntityNotFoundException;
 import itu.mbds.collaborativecommutingapi.security.CustomUserDetails;
+import itu.mbds.collaborativecommutingapi.services.car.ICarService;
 import itu.mbds.collaborativecommutingapi.services.file.IFileService;
 import itu.mbds.collaborativecommutingapi.services.user.IUserService;
 import jakarta.validation.Valid;
@@ -20,11 +23,13 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
     private final IUserService userService;
+    private final ICarService carService;
     private final IFileService fileService;
     private final PasswordEncoder encoder;
 
@@ -32,8 +37,9 @@ public class UserController {
     private String PROFILE_PIC_UPLOAD_DIR;
 
     @Autowired
-    public UserController(IUserService userService, IFileService fileService, PasswordEncoder encoder) {
+    public UserController(IUserService userService, ICarService carService, IFileService fileService, PasswordEncoder encoder) {
         this.userService = userService;
+        this.carService = carService;
         this.fileService = fileService;
         this.encoder = encoder;
     }
@@ -52,8 +58,14 @@ public class UserController {
 
     @PutMapping("/profile/{id}")
     @PreAuthorize("#id == authentication.principal.id")
-    public ResponseEntity<UserDTO> updateUser(@PathVariable String id, @Valid @RequestBody UserRequestDTO userDTO) {
-        userDTO.setPassword(encoder.encode(userDTO.getPassword()));
+    public ResponseEntity<?> updateUser(@PathVariable String id, @Valid @RequestBody UserRequestDTO userDTO) {
+        User emailUser = userService.getUserByEmail(userDTO.getEmail());
+        if ( emailUser != null && !Objects.equals(emailUser.getId(), id)) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("message", "Email déja utilisé"));
+        }
+        if(userDTO.getPassword() != null) {
+            userDTO.setPassword(encoder.encode(userDTO.getPassword()));
+        }
         userService.update(id, userDTO);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
@@ -71,6 +83,18 @@ public class UserController {
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", e.getMessage()));
         }
+    }
+
+    @GetMapping("/{userId}/cars")
+    public ResponseEntity<?> getAllUserCar(@PathVariable String userId) {
+        List<CarDTO> cars = carService.getAllByUserId(userId);
+        return ResponseEntity.ok(cars);
+    }
+
+    @GetMapping("/{userId}/cars/{carId}")
+    public ResponseEntity<?> getUserCar(@PathVariable String userId, @PathVariable String carId) {
+        CarDTO car = carService.getByUserId(userId, carId);
+        return ResponseEntity.ok(car);
     }
 
     @GetMapping

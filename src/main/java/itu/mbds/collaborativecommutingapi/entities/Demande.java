@@ -47,7 +47,7 @@ public class Demande {
     private Double tarif;
 
     @NotNull
-    private LocalDateTime heureDepartEstimee;
+    private LocalDateTime heureArriveeEstimee;
 
     @NotNull
     private Status statut = Status.EN_ATTENTE;

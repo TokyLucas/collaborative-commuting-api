@@ -5,6 +5,7 @@ import itu.mbds.collaborativecommutingapi.enums.Status;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -19,6 +20,7 @@ public class DemandeResponseDTO {
     private Double arriveeLongitude;
     private int nbPlaces;
     private Double tarif;
+    private LocalDateTime heureArriveeEstimee;
     private Status statut;
     private Date dateCreation;
 }

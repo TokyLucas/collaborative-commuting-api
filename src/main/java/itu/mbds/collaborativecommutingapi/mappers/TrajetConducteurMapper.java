@@ -18,23 +18,32 @@ public class TrajetConducteurMapper {
         t.setPlacesDisponibles(dto.getPlacesDisponibles());
         t.setDescription(dto.getDescription());
         t.setStatut(dto.getStatut());
+        t.setActif(dto.getActif());
+        t.setMarque(dto.getMarque());
+        t.setType(dto.getType());
+        t.setCouleur(dto.getCouleur());
         return t;
     }
 
-    public static TrajetConducteurDTO toDTO(TrajetConducteur entity) {
+    public static TrajetConducteurDTO toDto(TrajetConducteur t) {
         TrajetConducteurDTO dto = new TrajetConducteurDTO();
-        dto.setId(entity.getId());
-        dto.setIdConducteur(entity.getIdConducteur());
-        dto.setPointDepart(entity.getPointDepart());
-        dto.setLatDepart(entity.getLatDepart());
-        dto.setLngDepart(entity.getLngDepart());
-        dto.setPointArrivee(entity.getPointArrivee());
-        dto.setLatArrivee(entity.getLatArrivee());
-        dto.setLngArrivee(entity.getLngArrivee());
-        dto.setHeureDepartEstimee(entity.getHeureDepartEstimee());
-        dto.setPlacesDisponibles(entity.getPlacesDisponibles());
-        dto.setDescription(entity.getDescription());
-        dto.setStatut(entity.getStatut());
+        dto.setId(t.getId());
+        dto.setIdConducteur(t.getIdConducteur());
+        dto.setPointDepart(t.getPointDepart());
+        dto.setLatDepart(t.getLatDepart());
+        dto.setLngDepart(t.getLngDepart());
+        dto.setPointArrivee(t.getPointArrivee());
+        dto.setLatArrivee(t.getLatArrivee());
+        dto.setLngArrivee(t.getLngArrivee());
+        dto.setHeureDepartEstimee(t.getHeureDepartEstimee());
+        dto.setPlacesDisponibles(t.getPlacesDisponibles());
+        dto.setDescription(t.getDescription());
+        dto.setStatut(t.getStatut());
+        dto.setActif(t.getActif());
+        dto.setMarque(t.getMarque());
+        dto.setType(t.getType());
+        dto.setCouleur(t.getCouleur());
         return dto;
     }
+
 }

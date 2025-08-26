@@ -45,10 +45,10 @@ public class MatchingServiceImpl implements IMatchingService {
         // Vérification horaires
         if (demande.getPointArrivee().equalsIgnoreCase(conducteur.getPointArrivee())) {
             // même destination → heures d'arrivée estimées doivent correspondre
-            return demande.getHeureDepartEstimee().equals(conducteur.getHeureDepartEstimee());
+            return demande.getHeureArriveeEstimee().equals(conducteur.getHeureDepartEstimee());
         } else {
             // destination différente → heure de passage du conducteur au point de l'étudiant doit correspondre
-            return demande.getHeureDepartEstimee().equals(conducteur.getHeureDepartEstimee());
+            return demande.getHeureArriveeEstimee().equals(conducteur.getHeureDepartEstimee());
         }
     }
 
