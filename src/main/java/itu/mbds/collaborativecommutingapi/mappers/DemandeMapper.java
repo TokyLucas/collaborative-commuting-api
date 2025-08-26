@@ -21,6 +21,22 @@ public class DemandeMapper {
                 .build();
     }
 
+    public static Demande toEntity(DemandeResponseDTO dto) {
+        return Demande.builder()
+                .etudiantId(dto.getEtudiantId())
+                .pointDepart(dto.getPointDepart())
+                .departLatitude(dto.getDepartLatitude())
+                .departLongitude(dto.getDepartLongitude())
+                .pointArrivee(dto.getPointArrivee())
+                .arriveeLongitude(dto.getArriveeLongitude())
+                .arriveeLatitude(dto.getArriveeLatitude())
+                .nbPlaces(dto.getNbPlaces())
+                .tarif(dto.getTarif())
+                .statut(dto.getStatut())
+                .dateCreation(dto.getDateCreation())
+                .build();
+    }
+
     public DemandeResponseDTO toDto(Demande demande) {
         return DemandeResponseDTO.builder()
                 .etudiantId(demande.getEtudiantId())

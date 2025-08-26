@@ -1,8 +1,10 @@
 package itu.mbds.collaborativecommutingapi.services.match;
 
 import itu.mbds.collaborativecommutingapi.dtos.TrajetConducteurDTO;
+import itu.mbds.collaborativecommutingapi.dtos.demande.DemandeResponseDTO;
 import itu.mbds.collaborativecommutingapi.entities.Demande;
 import itu.mbds.collaborativecommutingapi.mappers.TrajetConducteurMapper;
+import itu.mbds.collaborativecommutingapi.mappers.DemandeMapper;
 import itu.mbds.collaborativecommutingapi.models.TrajetConducteur;
 import itu.mbds.collaborativecommutingapi.repositories.TrajetConducteurRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +18,8 @@ import java.util.stream.Collectors;
 public class MatchingServiceImpl implements IMatchingService {
     private final TrajetConducteurRepository trajetConducteurRepository;
 
-    public List<TrajetConducteurDTO> matchConducteurs(Demande demande) {
+    public List<TrajetConducteurDTO> matchConducteurs(DemandeResponseDTO demandeDTO) {
+        Demande demande = DemandeMapper.toEntity(demandeDTO);
         List<TrajetConducteur> conducteurs = trajetConducteurRepository.findAll();
 
         return conducteurs.stream()

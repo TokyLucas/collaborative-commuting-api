@@ -54,13 +54,13 @@ public class DemandeController {
     }
 
     //Récupération d'un match
-    @GetMapping("/{id}/match")
+    @GetMapping("/match/{id}")
     public ResponseEntity<List<TrajetConducteurDTO>> matchDemandes(@PathVariable String id) {
         // On récupère la demande depuis la DB
-        DemandeResponseDTO demande = demandeService.getById(id); // méthode à créer dans ton service pour renvoyer l'entité complète
+        DemandeResponseDTO demandeDTO = demandeService.getById(id); // méthode à créer dans ton service pour renvoyer l'entité complète
 
         // On récupère les conducteurs matchés
-        List<TrajetConducteurDTO> conducteursMatch = matchingService.matchConducteurs(demande);
+        List<TrajetConducteurDTO> conducteursMatch = matchingService.matchConducteurs(demandeDTO);
 
         return ResponseEntity.ok(conducteursMatch);
     }
