@@ -96,4 +96,10 @@ public class UserController {
         CarDTO car = carService.getByUserId(userId, carId);
         return ResponseEntity.ok(car);
     }
+
+    @GetMapping
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
+        return ResponseEntity.ok(userService.getAll());
+    }
 }
