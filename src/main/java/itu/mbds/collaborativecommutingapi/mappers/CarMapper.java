@@ -1,0 +1,30 @@
+package itu.mbds.collaborativecommutingapi.mappers;
+
+import itu.mbds.collaborativecommutingapi.dtos.car.CarDTO;
+import itu.mbds.collaborativecommutingapi.entities.Car;
+import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Component
+public class CarMapper {
+    public CarDTO toCarDTO(Car car) {
+        CarDTO carDTO = new CarDTO();
+        carDTO.setId(car.getId());
+        carDTO.setBrand(car.getBrand());
+        carDTO.setModel(car.getModel());
+        carDTO.setColor(car.getColor());
+        carDTO.setNbPlaces(car.getNbPlaces());
+        carDTO.setUser(car.getUser());
+        return carDTO;
+    }
+
+    public List<CarDTO> toCarDTOs(List<Car> cars) {
+        List<CarDTO> carDTOs = new ArrayList<>();
+        for(Car car : cars) {
+            carDTOs.add(toCarDTO(car));
+        }
+        return carDTOs;
+    }
+}
