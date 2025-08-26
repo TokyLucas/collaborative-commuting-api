@@ -11,4 +11,7 @@ public interface ICarService {
     CarDTO getById(String id);
     List<CarDTO> getAllByUserId(String userId);
     CarDTO getByUserId(String userId, String carId);
+    CarDTO save(CarDTO carDTO);
+    CarDTO update(String carId, CarDTO carDTO);
+    void delete(String cardId);
 }

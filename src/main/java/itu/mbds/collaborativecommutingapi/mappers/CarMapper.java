@@ -9,6 +9,17 @@ import java.util.List;
 
 @Component
 public class CarMapper {
+    public Car toCar(CarDTO carDTO) {
+        Car car = new Car();
+        car.setId(carDTO.getId());
+        car.setBrand(carDTO.getBrand());
+        car.setModel(carDTO.getModel());
+        car.setColor(carDTO.getColor());
+        car.setNbPlaces(carDTO.getNbPlaces());
+        car.setUserId(carDTO.getUserId());
+        return car;
+    }
+
     public CarDTO toCarDTO(Car car) {
         CarDTO carDTO = new CarDTO();
         carDTO.setId(car.getId());

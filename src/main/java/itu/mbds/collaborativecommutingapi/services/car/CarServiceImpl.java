@@ -2,6 +2,7 @@ package itu.mbds.collaborativecommutingapi.services.car;
 
 import itu.mbds.collaborativecommutingapi.dtos.car.CarDTO;
 import itu.mbds.collaborativecommutingapi.entities.Car;
+import itu.mbds.collaborativecommutingapi.entities.User;
 import itu.mbds.collaborativecommutingapi.exceptions.EntityNotFoundException;
 import itu.mbds.collaborativecommutingapi.mappers.CarMapper;
 import itu.mbds.collaborativecommutingapi.repositories.CarRepository;
@@ -42,5 +43,29 @@ public class CarServiceImpl implements ICarService {
         if (car.isEmpty())
             throw new EntityNotFoundException("Car id: " + carId + " not found");
         return carMapper.toCarDTO(car.get());
+    }
+
+    @Override
+    public CarDTO save(CarDTO carDTO) {
+        return carMapper.toCarDTO(carRepository.save(carMapper.toCar(carDTO)));
+    }
+
+    @Override
+    public CarDTO update(String carId, CarDTO carDTO) {
+        Optional<Car> car = carRepository.findById(carId);
+        if (car.isEmpty())
+            throw new EntityNotFoundException("Car id: " + carId + " not found");
+        Car carExistant = car.get();
+        carExistant.setBrand(carDTO.getBrand());
+        carExistant.setModel(carDTO.getModel());
+        carExistant.setColor(carDTO.getColor());
+        carExistant.setNbPlaces(carDTO.getNbPlaces());
+
+        return carMapper.toCarDTO(carRepository.save(carExistant));
+    }
+
+    @Override
+    public void delete(String cardId) {
+        carRepository.deleteById(cardId);
     }
 }
