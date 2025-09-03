@@ -102,4 +102,10 @@ public class UserController {
     public ResponseEntity<List<UserDTO>> getAllUsers() {
         return ResponseEntity.ok(userService.getAll());
     }
+
+    @GetMapping("/{idCar}/car")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<CarDTO> getById(@PathVariable String id) {
+        return ResponseEntity.ok(carService.getById(id));
+    }
 }

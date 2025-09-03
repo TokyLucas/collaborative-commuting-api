@@ -2,6 +2,8 @@ package itu.mbds.collaborativecommutingapi.controllers;
 
 import itu.mbds.collaborativecommutingapi.dtos.TrajetConducteurDTO;
 import itu.mbds.collaborativecommutingapi.models.TrajetConducteur;
+import itu.mbds.collaborativecommutingapi.models.TrajetVoitureView;
+import itu.mbds.collaborativecommutingapi.services.TrajetVoiture.ITrajetVoitureService;
 import itu.mbds.collaborativecommutingapi.services.trajetConducteur.ITrajetConducteurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,10 +15,13 @@ import java.util.List;
 @RequestMapping("/api/trajetC")
 public class TrajetConducteurController {
     private final ITrajetConducteurService service;
+    private final ITrajetVoitureService serviceV;
+
 
     @Autowired
-    public TrajetConducteurController(ITrajetConducteurService service) {
+    public TrajetConducteurController(ITrajetConducteurService service, ITrajetVoitureService serviceV) {
         this.service = service;
+        this.serviceV = serviceV;
     }
 
     @PostMapping
@@ -55,5 +60,9 @@ public class TrajetConducteurController {
         return service.getByIdConducteur(conducteurId);
     }
 
-
+    @GetMapping("/getAll")
+    @PreAuthorize("isAuthenticated()")
+    public List<TrajetVoitureView> getAllTV() {
+        return serviceV.getAll();
+    }
 }

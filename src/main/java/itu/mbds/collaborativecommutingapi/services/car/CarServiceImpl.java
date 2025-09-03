@@ -28,7 +28,9 @@ public class CarServiceImpl implements ICarService {
 
     @Override
     public CarDTO getById(String id) {
-        return null;
+        return carRepository.findById(id)
+                .map(carMapper::toCarDTO)
+                .orElseThrow(() -> new RuntimeException("Car not found with id: " + id));
     }
 
     @Override

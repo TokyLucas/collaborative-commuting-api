@@ -1,9 +1,7 @@
 package itu.mbds.collaborativecommutingapi.dtos;
-
+import itu.mbds.collaborativecommutingapi.entities.Car;
 import lombok.Data;
-
 import java.time.LocalDateTime;
-
 @Data
 public class TrajetConducteurDTO {
     private String id;
@@ -19,7 +17,5 @@ public class TrajetConducteurDTO {
     private String description;
     private String statut;
     private Integer actif;
-    private String marque;
-    private String type;
-    private String couleur;
+    private String voitureId;
 }

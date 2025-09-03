@@ -3,16 +3,14 @@ package itu.mbds.collaborativecommutingapi.models;
 import itu.mbds.collaborativecommutingapi.entities.Car;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDateTime;
-
 @Data
-@Document(collection = "trajet_conducteurs")
-public class TrajetConducteur {
+@Document(collection = "trajets_voitures")
+public class TrajetVoitureView {
     @Id
     private String id;
+
     private String idConducteur;
     private String pointDepart;
     private Double latDepart;
@@ -20,12 +18,15 @@ public class TrajetConducteur {
     private String pointArrivee;
     private Double latArrivee;
     private Double lngArrivee;
-    private LocalDateTime heureDepartEstimee;
+
+    // Si la vue renvoie ISO string, garde String; si tu as converti en Date dans la vue, mets java.util.Date
+    private String heureDepartEstimee;
+
     private Integer placesDisponibles;
     private String description;
     private String statut;
-    private LocalDateTime creeLe = LocalDateTime.now();
-    private LocalDateTime misAJourLe = LocalDateTime.now();
     private Integer actif;
-    private String voitureId;
+
+    private String voitureId;       // id de la voiture référencée
+    private Car car;
 }
