@@ -51,7 +51,7 @@ public class AuthController {
         if (!encoder.matches(userSignInDTO.getPassword(), user.getPassword()))
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Mot de passe incorrect"));
 
-        String token = jwtService.generateToken(user.getEmail());
+        String token = jwtService.generateToken(user.getEmail(), String.valueOf(user.getType()));
         UserDTO userDTO = userService.getUserById(user.getId());
         return ResponseEntity.ok(Map.of(
             "token", token, "userId", userDTO.getId()

@@ -16,9 +16,10 @@ public class JwtServiceImpl implements IJwtService {
     private Long TOKEN_EXPIRATION;
 
     @Override
-    public String generateToken(String email) {
+    public String generateToken(String email, String role) {
         return Jwts.builder()
                 .setSubject(email)
+                .claim("role", role)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + TOKEN_EXPIRATION))
                 .signWith(SignatureAlgorithm.HS256, SECRET)

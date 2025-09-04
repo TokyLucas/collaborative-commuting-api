@@ -10,6 +10,7 @@ import java.util.List;
 public interface TrajetVoitureViewRepository  extends MongoRepository<TrajetVoitureView,String> {
 
     List<TrajetVoitureView> findByActif(Integer actif);
+    //TrajetVoitureView findById(String id);
 
     List<TrajetVoitureView> findByIdConducteur(String idConducteur);
 

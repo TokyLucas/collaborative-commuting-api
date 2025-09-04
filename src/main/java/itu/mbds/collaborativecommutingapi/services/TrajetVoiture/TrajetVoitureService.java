@@ -6,6 +6,8 @@ import itu.mbds.collaborativecommutingapi.repositories.TrajetVoitureViewReposito
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class TrajetVoitureService implements ITrajetVoitureService {
 
@@ -17,5 +19,10 @@ public class TrajetVoitureService implements ITrajetVoitureService {
     @Override
     public List<TrajetVoitureView> getAll() {
         return repository.findAll();
+    }
+
+    @Override
+    public Optional<TrajetVoitureView> get(String id) {
+        return repository.findById(id);
     }
 }

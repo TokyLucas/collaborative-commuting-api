@@ -6,6 +6,7 @@ import itu.mbds.collaborativecommutingapi.models.TrajetVoitureView;
 import itu.mbds.collaborativecommutingapi.services.TrajetVoiture.ITrajetVoitureService;
 import itu.mbds.collaborativecommutingapi.services.trajetConducteur.ITrajetConducteurService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -65,4 +66,12 @@ public class TrajetConducteurController {
     public List<TrajetVoitureView> getAllTV() {
         return serviceV.getAll();
     }
+
+    @GetMapping("/getOne/{id}")
+    public ResponseEntity<TrajetVoitureView> getOne(@PathVariable String id) {
+        return serviceV.get(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
 }
