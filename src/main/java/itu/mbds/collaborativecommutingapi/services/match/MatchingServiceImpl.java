@@ -25,11 +25,11 @@ public class MatchingServiceImpl implements IMatchingService {
         return conducteurs.stream()
                 .filter(c -> c.getPlacesDisponibles() >= demande.getNbPlaces())
                 .filter(c -> matchTrajet(demande, c))
-                .map(TrajetConducteurMapper::toDTO)
+                .map(TrajetConducteurMapper::toDto)
                 .collect(Collectors.toList());
     }
 
-    private boolean matchTrajet(Demande demande, TrajetConducteur conducteur) {
+    /*private boolean matchTrajet(Demande demande, TrajetConducteur conducteur) {
         // Check si points départ et arrivée EXACTS
         boolean exactMatch = demande.getPointDepart().equalsIgnoreCase(conducteur.getPointDepart())
                 && demande.getPointArrivee().equalsIgnoreCase(conducteur.getPointArrivee());
@@ -62,5 +62,10 @@ public class MatchingServiceImpl implements IMatchingService {
                 * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         return R * c;
+    }*/
+
+    private boolean matchTrajet(Demande demande, TrajetConducteur conducteur) {
+        return demande.getPointDepart().equalsIgnoreCase(conducteur.getPointDepart())
+                && demande.getPointArrivee().equalsIgnoreCase(conducteur.getPointArrivee());
     }
 }
