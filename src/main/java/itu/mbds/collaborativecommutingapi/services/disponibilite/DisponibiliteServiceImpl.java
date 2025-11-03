@@ -62,9 +62,10 @@ public class DisponibiliteServiceImpl implements IDisponibiliteService {
 
     @Override
     public List<DisponibiliteDTO> findNearby(Point location, Distance radius) {
-        return repo.findByPositionNear(location, radius)
+        return repo.findNearbyConducteursDisponibles(location, radius.getNormalizedValue())
                 .stream()
                 .map(mapper::toDTO)
                 .collect(Collectors.toList());
     }
+
 }
