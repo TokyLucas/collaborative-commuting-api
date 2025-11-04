@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.Distance;
 import org.springframework.data.geo.Metrics;
 import org.springframework.data.geo.Point;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +27,11 @@ public class DisponibiliteController {
 
     @PostMapping
     public ResponseEntity<DisponibiliteDTO> create(@Valid @RequestBody DisponibiliteRequestDTO dto) {
-        return ResponseEntity.ok(service.create(dto));
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(service.create(dto));
+        } catch (IllegalStateException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
     }
 
     @PutMapping("/position/{conducteurId}")
@@ -51,5 +56,10 @@ public class DisponibiliteController {
         Point p = new Point(lng, lat);
         Distance d = new Distance(radiusMeters / 1000.0, Metrics.KILOMETERS);
         return ResponseEntity.ok(service.findNearby(p, d));
+    }
+
+    @GetMapping("/conducteur/{conducteurId}")
+    public ResponseEntity<DisponibiliteDTO> getByConducteurId(@PathVariable String conducteurId) {
+        return ResponseEntity.ok(service.getByConducteurId(conducteurId));
     }
 }
