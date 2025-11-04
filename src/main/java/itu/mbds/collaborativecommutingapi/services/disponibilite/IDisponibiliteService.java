@@ -12,4 +12,6 @@ public interface IDisponibiliteService {
     DisponibiliteDTO updatePosition(String conducteurId, DisponibiliteRequestDTO dto);
     DisponibiliteDTO updateStatut(String conducteurId, itu.mbds.collaborativecommutingapi.enums.DisponibiliteStatut statut);
     List<DisponibiliteDTO> findNearby(Point location, Distance radius);
+
+    DisponibiliteDTO getByConducteurId(String conducteurId);
 }
