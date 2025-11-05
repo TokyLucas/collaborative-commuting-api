@@ -23,18 +23,16 @@ public class MatchingServiceImpl implements IMatchingService {
         List<TrajetConducteur> conducteurs = trajetConducteurRepository.findAll();
 
         return conducteurs.stream()
-                .filter(c -> c.getPlacesDisponibles() >= demande.getNbPlaces())
                 .filter(c -> matchTrajet(demande, c))
+                .filter(c -> c.getPlacesDisponibles() >= demande.getNbPlaces())
                 .map(TrajetConducteurMapper::toDto)
                 .collect(Collectors.toList());
     }
 
     private boolean matchTrajet(Demande demande, TrajetConducteur conducteur) {
-        // Vérifie si les points de départ et d'arrivée sont exactement les mêmes
         boolean exactMatch = demande.getPointDepart().equalsIgnoreCase(conducteur.getPointDepart())
                 && demande.getPointArrivee().equalsIgnoreCase(conducteur.getPointArrivee());
 
-        // Vérifie si le conducteur passe à proximité (moins de 3 km du point de départ et d’arrivée)
         boolean proximityMatch = distance(demande.getDepartLatitude(), demande.getDepartLongitude(),
                 conducteur.getLatDepart(), conducteur.getLngDepart()) <= 3.0
                 && distance(demande.getArriveeLatitude(), demande.getArriveeLongitude(),
