@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 public class DemandeMapper {
     public Demande toEntity(DemandeRequestDTO dto) {
         return Demande.builder()
+                .etudiantId(dto.getEtudiantId())
                 .pointDepart(dto.getPointDepart())
                 .departLatitude(dto.getDepartLatitude())
                 .departLongitude(dto.getDepartLongitude())
