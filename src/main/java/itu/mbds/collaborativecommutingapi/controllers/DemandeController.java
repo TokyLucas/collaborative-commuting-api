@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -30,24 +31,28 @@ public class DemandeController {
 
     // Création d’une demande
     @PostMapping
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<DemandeResponseDTO> create(@Valid @RequestBody DemandeRequestDTO dto) {
         return ResponseEntity.ok(demandeService.create(dto));
     }
 
     // Récupération d’une demande par ID
     @GetMapping("/{id}")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<DemandeResponseDTO> getById(@PathVariable String id) {
         return ResponseEntity.ok(demandeService.getById(id));
     }
 
     // Récupération de toutes les demandes
     @GetMapping
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<DemandeResponseDTO>> getAll() {
         return ResponseEntity.ok(demandeService.getAll());
     }
 
     // Suppression d’une demande par ID
     @DeleteMapping("/{id}")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Void> delete(@PathVariable String id) {
         demandeService.delete(id);
         return ResponseEntity.noContent().build();
@@ -55,13 +60,10 @@ public class DemandeController {
 
     //Récupération d'un match
     @GetMapping("/match/{id}")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<TrajetConducteurDTO>> matchDemandes(@PathVariable String id) {
-        // On récupère la demande depuis la DB
-        DemandeResponseDTO demandeDTO = demandeService.getById(id); // méthode à créer dans ton service pour renvoyer l'entité complète
-
-        // On récupère les conducteurs matchés
+        DemandeResponseDTO demandeDTO = demandeService.getById(id);
         List<TrajetConducteurDTO> conducteursMatch = matchingService.matchConducteurs(demandeDTO);
-
         return ResponseEntity.ok(conducteursMatch);
     }
 }
