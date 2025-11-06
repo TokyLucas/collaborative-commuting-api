@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 
+import java.time.Instant;
 import java.util.Date;
 
 @Data
@@ -13,5 +14,5 @@ public class DisponibiliteDTO {
     private String conducteurId;
     private GeoJsonPoint position;
     private itu.mbds.collaborativecommutingapi.enums.DisponibiliteStatut statut;
-    private Date updatedAt;
+    private Instant updatedAt;
 }
