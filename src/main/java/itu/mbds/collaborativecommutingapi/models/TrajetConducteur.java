@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Document(collection = "trajet_conducteurs")
@@ -28,4 +29,5 @@ public class TrajetConducteur {
     private LocalDateTime misAJourLe = LocalDateTime.now();
     private Integer actif;
     private String voitureId;
+    private List<Integer> jours;
 }

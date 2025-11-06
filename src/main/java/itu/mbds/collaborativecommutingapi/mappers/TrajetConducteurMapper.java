@@ -20,6 +20,7 @@ public class TrajetConducteurMapper {
         t.setStatut(dto.getStatut());
         t.setActif(dto.getActif());
         t.setVoitureId(dto.getVoitureId());
+        t.setJours(dto.getJours());
         return t;
     }
 
@@ -39,6 +40,7 @@ public class TrajetConducteurMapper {
         dto.setStatut(t.getStatut());
         dto.setActif(t.getActif());
         dto.setVoitureId(t.getVoitureId());
+        dto.setJours(t.getJours());
         return dto;
     }
 
