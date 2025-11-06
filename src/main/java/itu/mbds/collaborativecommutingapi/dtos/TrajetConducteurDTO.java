@@ -1,6 +1,8 @@
 package itu.mbds.collaborativecommutingapi.dtos;
 import itu.mbds.collaborativecommutingapi.entities.Car;
 import lombok.Data;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,9 +18,14 @@ public class TrajetConducteurDTO {
     private Double lngArrivee;
     private LocalDateTime heureDepartEstimee;
     private Integer placesDisponibles;
+    private Integer placesDispoJournalier;
     private String description;
     private String statut;
+    private LocalDateTime creeLe = LocalDateTime.now();
+    private LocalDateTime misAJourLe = LocalDateTime.now();
     private Integer actif;
     private String voitureId;
-    private List<Integer> jours ;
+    private List<Integer> jours;
+    private LocalDate dateDesactivationDebut;
+    private LocalDate dateDesactivationFin;
 }

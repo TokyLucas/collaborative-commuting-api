@@ -21,6 +21,10 @@ public class TrajetConducteurMapper {
         t.setActif(dto.getActif());
         t.setVoitureId(dto.getVoitureId());
         t.setJours(dto.getJours());
+        t.setPlacesDispoJournalier(dto.getPlacesDispoJournalier());
+        t.setDateDesactivationDebut(dto.getDateDesactivationDebut());
+        t.setDateDesactivationFin(dto.getDateDesactivationFin());
+
         return t;
     }
 
@@ -41,6 +45,9 @@ public class TrajetConducteurMapper {
         dto.setActif(t.getActif());
         dto.setVoitureId(t.getVoitureId());
         dto.setJours(t.getJours());
+        dto.setPlacesDispoJournalier(t.getPlacesDispoJournalier());
+        dto.setDateDesactivationDebut(t.getDateDesactivationDebut());
+        dto.setDateDesactivationFin(t.getDateDesactivationFin());
         return dto;
     }
 

@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class TrajetConducteur {
     private Double lngArrivee;
     private LocalDateTime heureDepartEstimee;
     private Integer placesDisponibles;
+    private Integer placesDispoJournalier;
     private String description;
     private String statut;
     private LocalDateTime creeLe = LocalDateTime.now();
@@ -30,4 +32,6 @@ public class TrajetConducteur {
     private Integer actif;
     private String voitureId;
     private List<Integer> jours;
+    private LocalDate dateDesactivationDebut;
+    private LocalDate dateDesactivationFin;
 }
