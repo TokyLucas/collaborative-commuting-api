@@ -1,6 +1,7 @@
 package itu.mbds.collaborativecommutingapi.controllers;
 
 import itu.mbds.collaborativecommutingapi.dtos.TrajetConducteurDTO;
+import itu.mbds.collaborativecommutingapi.enums.StatutTrajet;
 import itu.mbds.collaborativecommutingapi.models.TrajetConducteur;
 import itu.mbds.collaborativecommutingapi.models.TrajetVoitureView;
 import itu.mbds.collaborativecommutingapi.services.TrajetVoiture.ITrajetVoitureService;
@@ -72,6 +73,11 @@ public class TrajetConducteurController {
         return serviceV.get(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/statut/{statut}")
+    public List<TrajetConducteur> getByStatut(@PathVariable String statut) {
+        return service.getByStatut(statut);
     }
 
 }

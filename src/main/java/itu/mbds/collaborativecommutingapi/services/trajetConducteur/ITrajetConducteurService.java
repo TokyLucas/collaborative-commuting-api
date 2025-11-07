@@ -13,6 +13,5 @@ public interface ITrajetConducteurService {
         void delete(String id);
         TrajetConducteur update(String id, TrajetConducteurDTO trajet);
         List<TrajetConducteurDTO> getByIdConducteur(String conducteurId);
-
-
+        List<TrajetConducteur> getByStatut(String statut);
 }

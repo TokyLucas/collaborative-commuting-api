@@ -63,4 +63,10 @@ public class TrajetConducteurService implements ITrajetConducteurService {
                 .map(TrajetConducteurMapper::toDto)
                 .toList();
     }
+
+    @Override
+    public List<TrajetConducteur> getByStatut(String statut) {
+        List<TrajetConducteur> result = repository.findByStatutIgnoreCase(statut);
+        return result != null ? result : List.of();
+    }
 }
