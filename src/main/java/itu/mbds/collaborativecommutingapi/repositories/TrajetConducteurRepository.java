@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface TrajetConducteurRepository extends MongoRepository<TrajetConducteur, String> {
     List<TrajetConducteur> findByIdConducteur(String conducteurId);
+    List<TrajetConducteur> findByStatutIgnoreCase(String statut);
+
 }
