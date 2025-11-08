@@ -13,4 +13,6 @@ public interface IDemandeService {
     List<DemandeResponseDTO> getAll();
 
     void delete(String id);
+
+    List<DemandeResponseDTO> getDemandesByPassagerId(String passagerId);
 }
