@@ -66,4 +66,9 @@ public class DemandeController {
         List<TrajetConducteurDTO> conducteursMatch = matchingService.matchConducteurs(demandeDTO);
         return ResponseEntity.ok(conducteursMatch);
     }
+
+    @GetMapping("/passager/{passagerId}")
+    public List<DemandeResponseDTO> getDemandesByPassager(@PathVariable String passagerId) {
+        return demandeService.getDemandesByPassagerId(passagerId);
+    }
 }

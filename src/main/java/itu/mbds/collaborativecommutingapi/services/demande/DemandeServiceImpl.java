@@ -49,4 +49,12 @@ public class DemandeServiceImpl implements IDemandeService {
         }
         demandeRepository.deleteById(id);
     }
+
+    @Override
+    public List<DemandeResponseDTO> getDemandesByPassagerId(String passagerId) {
+        List<Demande> demandes = demandeRepository.findByEtudiantId(passagerId);
+        return demandes.stream()
+                .map(demandeMapper::toDto)
+                .toList();
+    }
 }
