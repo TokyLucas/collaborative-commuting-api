@@ -3,10 +3,18 @@ package itu.mbds.collaborativecommutingapi.mappers;
 import itu.mbds.collaborativecommutingapi.dtos.demande.DemandeRequestDTO;
 import itu.mbds.collaborativecommutingapi.dtos.demande.DemandeResponseDTO;
 import itu.mbds.collaborativecommutingapi.entities.Demande;
+import itu.mbds.collaborativecommutingapi.models.TrajetConducteur;
+import itu.mbds.collaborativecommutingapi.repositories.TrajetConducteurRepository;
 import org.springframework.stereotype.Component;
 
 @Component
 public class DemandeMapper {
+    private final TrajetConducteurRepository trajetConducteurRepository;
+
+    public DemandeMapper(TrajetConducteurRepository trajetConducteurRepository) {
+        this.trajetConducteurRepository = trajetConducteurRepository;
+    }
+
     public Demande toEntity(DemandeRequestDTO dto) {
         return Demande.builder()
                 .etudiantId(dto.getEtudiantId())
@@ -40,8 +48,19 @@ public class DemandeMapper {
     }
 
     public DemandeResponseDTO toDto(Demande demande) {
+
+        String conducteurId = null;
+
+        if (demande.getTrajetId() != null) {
+            var trajet = trajetConducteurRepository.findById(demande.getTrajetId()).orElse(null);
+            if (trajet != null) {
+                conducteurId = trajet.getIdConducteur();
+            }
+        }
         return DemandeResponseDTO.builder()
                 .etudiantId(demande.getEtudiantId())
+                .trajetId(demande.getTrajetId())
+                .conducteurId(conducteurId)
                 .pointDepart(demande.getPointDepart())
                 .departLatitude(demande.getDepartLatitude())
                 .departLongitude(demande.getDepartLongitude())

@@ -23,6 +23,9 @@ public class Demande {
     private String etudiantId;
 
     @NotNull
+    private String trajetId;
+
+    @NotNull
     private String pointDepart;
 
     @NotNull

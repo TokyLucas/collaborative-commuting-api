@@ -51,10 +51,19 @@ public class DemandeServiceImpl implements IDemandeService {
     }
 
     @Override
-    public List<DemandeResponseDTO> getDemandesByPassagerId(String passagerId) {
+public List<DemandeResponseDTO> getDemandesByPassagerId(String passagerId) {
         List<Demande> demandes = demandeRepository.findByEtudiantId(passagerId);
         return demandes.stream()
                 .map(demandeMapper::toDto)
                 .toList();
     }
+    
+      @Override
+    public DemandeResponseDTO getAcceptedDemande(String etudiantId) {
+          Demande demande = demandeRepository
+                  .findByEtudiantIdAndStatut(etudiantId, Status.ACCEPTEE)
+                  .orElse(null);
+
+          return demande != null ? demandeMapper.toDto(demande) : null;
+      }
 }

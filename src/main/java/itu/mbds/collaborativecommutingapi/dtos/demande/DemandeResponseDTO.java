@@ -23,4 +23,6 @@ public class DemandeResponseDTO {
     private LocalDateTime heureArriveeEstimee;
     private Status statut;
     private Date dateCreation;
+    private String trajetId;
+    private String conducteurId;
 }
