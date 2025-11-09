@@ -58,6 +58,7 @@ public class DemandeMapper {
             }
         }
         return DemandeResponseDTO.builder()
+                .id(demande.getId())
                 .etudiantId(demande.getEtudiantId())
                 .trajetId(demande.getTrajetId())
                 .conducteurId(conducteurId)
