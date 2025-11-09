@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Data
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor @Builder
 public class DemandeRequestDTO {
-
+    @NotNull
     private String etudiantId;
     @NotNull
     private String pointDepart;
@@ -28,4 +28,6 @@ public class DemandeRequestDTO {
     private Double tarif;
     @NotNull
     private LocalDateTime heureArriveeEstimee;
+    @NotNull
+    private String trajetId;
 }

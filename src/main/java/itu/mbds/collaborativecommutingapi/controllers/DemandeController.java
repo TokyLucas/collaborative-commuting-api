@@ -66,4 +66,23 @@ public class DemandeController {
         List<TrajetConducteurDTO> conducteursMatch = matchingService.matchConducteurs(demandeDTO);
         return ResponseEntity.ok(conducteursMatch);
     }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/passager/{passagerId}")
+        public ResponseEntity<List<DemandeResponseDTO>> getDemandesByPassagerId(@PathVariable String passagerId) {
+            List<DemandeResponseDTO> demandes = demandeService.getDemandesByPassagerId(passagerId);
+            return ResponseEntity.ok(demandes);
+        }
+
+    @GetMapping("/accepted/{userId}")
+    public ResponseEntity<DemandeResponseDTO> getAcceptedLinked(@PathVariable String userId) {
+
+        DemandeResponseDTO dto = demandeService.getAcceptedLinked(userId);
+
+        if (dto == null) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(dto);
+    }
 }
