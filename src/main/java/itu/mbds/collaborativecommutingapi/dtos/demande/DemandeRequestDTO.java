@@ -28,6 +28,4 @@ public class DemandeRequestDTO {
     private Double tarif;
     @NotNull
     private LocalDateTime heureArriveeEstimee;
-    @NotNull
-    private String trajetId;
 }
