@@ -5,9 +5,13 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Data
 @Document(collection = "trajets_voitures")
 public class TrajetVoitureView {
+
     @Id
     private String id;
 
@@ -19,7 +23,6 @@ public class TrajetVoitureView {
     private Double latArrivee;
     private Double lngArrivee;
 
-    // Si la vue renvoie ISO string, garde String; si tu as converti en Date dans la vue, mets java.util.Date
     private String heureDepartEstimee;
 
     private Integer placesDisponibles;
@@ -27,6 +30,11 @@ public class TrajetVoitureView {
     private String statut;
     private Integer actif;
 
-    private String voitureId;       // id de la voiture référencée
+    private String voitureId;
     private Car car;
+
+    // Nouveaux champs de la vue
+    private List<Integer> jours;
+    private LocalDateTime dateDesactivationDebut;
+    private LocalDateTime dateDesactivationFin;
 }
