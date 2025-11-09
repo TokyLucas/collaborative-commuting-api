@@ -26,6 +26,8 @@ public class TrajetConducteurDTO {
     private Integer actif;
     private String voitureId;
     private List<Integer> jours;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateDesactivationDebut;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateDesactivationFin;
 }
