@@ -1,4 +1,5 @@
 package itu.mbds.collaborativecommutingapi.dtos;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import itu.mbds.collaborativecommutingapi.entities.Car;
 import lombok.Data;
 
