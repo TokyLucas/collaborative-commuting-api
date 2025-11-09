@@ -49,12 +49,20 @@ public class TrajetConducteurService implements ITrajetConducteurService {
         if (dto.getLngArrivee() != null) existing.setLngArrivee(dto.getLngArrivee());
         if (dto.getHeureDepartEstimee() != null) existing.setHeureDepartEstimee(dto.getHeureDepartEstimee());
         if (dto.getPlacesDisponibles() != null) existing.setPlacesDisponibles(dto.getPlacesDisponibles());
+        if (dto.getPlacesDispoJournalier() != null) existing.setPlacesDispoJournalier(dto.getPlacesDispoJournalier());
         if (dto.getDescription() != null) existing.setDescription(dto.getDescription());
         if (dto.getStatut() != null) existing.setStatut(dto.getStatut());
         if (dto.getActif() != null) existing.setActif(dto.getActif());
+        if (dto.getVoitureId() != null) existing.setVoitureId(dto.getVoitureId());
+
+        // ✅ Manquants
+        if (dto.getJours() != null) existing.setJours(dto.getJours());
+        if (dto.getDateDesactivationDebut() != null) existing.setDateDesactivationDebut(dto.getDateDesactivationDebut());
+        if (dto.getDateDesactivationFin() != null) existing.setDateDesactivationFin(dto.getDateDesactivationFin());
 
         return repository.save(existing);
     }
+
 
     @Override
     public List<TrajetConducteurDTO> getByIdConducteur(String conducteurId) {
