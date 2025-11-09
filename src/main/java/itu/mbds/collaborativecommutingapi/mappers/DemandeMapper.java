@@ -41,6 +41,7 @@ public class DemandeMapper {
 
     public DemandeResponseDTO toDto(Demande demande) {
         return DemandeResponseDTO.builder()
+                .id(demande.getId())
                 .etudiantId(demande.getEtudiantId())
                 .pointDepart(demande.getPointDepart())
                 .departLatitude(demande.getDepartLatitude())

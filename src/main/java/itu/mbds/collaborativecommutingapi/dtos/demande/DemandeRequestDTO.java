@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Data
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor @Builder
 public class DemandeRequestDTO {
-
+    @NotNull
     private String etudiantId;
     @NotNull
     private String pointDepart;

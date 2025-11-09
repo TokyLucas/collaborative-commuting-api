@@ -67,8 +67,10 @@ public class DemandeController {
         return ResponseEntity.ok(conducteursMatch);
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/passager/{passagerId}")
-    public List<DemandeResponseDTO> getDemandesByPassager(@PathVariable String passagerId) {
-        return demandeService.getDemandesByPassagerId(passagerId);
+    public ResponseEntity<List<DemandeResponseDTO>> getDemandesByPassagerId(@PathVariable String passagerId) {
+        List<DemandeResponseDTO> demandes = demandeService.getDemandesByPassagerId(passagerId);
+        return ResponseEntity.ok(demandes);
     }
 }

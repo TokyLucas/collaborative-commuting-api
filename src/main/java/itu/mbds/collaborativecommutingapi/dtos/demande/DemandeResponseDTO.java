@@ -11,6 +11,7 @@ import java.util.Date;
 @Data
 @Builder
 public class DemandeResponseDTO {
+    private String id;
     private String etudiantId;
     private String pointDepart;
     private Double departLatitude;
