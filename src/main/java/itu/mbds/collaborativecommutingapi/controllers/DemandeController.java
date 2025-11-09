@@ -71,11 +71,16 @@ public class DemandeController {
     public List<DemandeResponseDTO> getDemandesByPassager(@PathVariable String passagerId) {
         return demandeService.getDemandesByPassagerId(passagerId);
     }
-    
-      @GetMapping("/accepted/{etudiantId}")
-    @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<DemandeResponseDTO> getAccepted(@PathVariable String etudiantId) {
-        return ResponseEntity.ok(demandeService.getAcceptedDemande(etudiantId));
-    }
 
+    @GetMapping("/accepted/{userId}")
+    public ResponseEntity<DemandeResponseDTO> getAcceptedLinked(@PathVariable String userId) {
+
+        DemandeResponseDTO dto = demandeService.getAcceptedLinked(userId);
+
+        if (dto == null) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(dto);
+    }
 }

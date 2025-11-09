@@ -12,5 +12,6 @@ import java.util.Optional;
 public interface DemandeRepository extends MongoRepository<Demande, String> {
    List<Demande> findByEtudiantId(String etudiantId);
    Optional<Demande> findByEtudiantIdAndStatut(String etudiantId, Status statut);
+   List<Demande> findByTrajetIdAndStatut(String trajetId, Status statut);
 }
 

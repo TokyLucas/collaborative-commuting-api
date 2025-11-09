@@ -15,6 +15,7 @@ public interface IDemandeService {
     void delete(String id);
 
     List<DemandeResponseDTO> getDemandesByPassagerId(String passagerId);
-    DemandeResponseDTO getAcceptedDemande(String etudiantId);
+
+    DemandeResponseDTO getAcceptedLinked(String userId);
 
 }
